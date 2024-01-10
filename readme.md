@@ -20,3 +20,10 @@ if you need to install anything use:
  -----------------------------
 
  not ignoring .env file since it has the db string with password already. 
+
+
+
+  -----------------------------
+
+
+  To be used with Rock-n-Reviews repository at https://github.com/NeNeZoRr/rock-n-reviews
