@@ -1,57 +1,59 @@
-const users = require('../models/users')
+const express = require('express');
+const User = require('../models/users');
 
-
-//show all users
+// Show all users
 async function getAllUsers(req, res) {
     try {
-        const user = await users.find()
-        res.json(user)
+        const user = await User.find();
+        res.json(user);
     } catch (error) {
-        console.log('error fetching all users', error)
-        res.status(500).json({ message: 'error getting all users' })
+        console.log('error fetching all users', error);
+        res.status(500).json({ message: 'error getting all users' });
     }
 }
 
-//show user
+// Show user by ID
 async function getUserById(req, res) {
     try {
-        const { id } = req.params
-        const user = await users.findById(id)
-        res.json(user)
+        const { id } = req.params;
+        const user = await User.findById(id);
+        res.json(user);
     } catch (error) {
-        console.log('error fetching all users', error)
-        res.status(500).json({ message: 'error getting user' })
+        console.log('error fetching user', error);
+        res.status(500).json({ message: 'error getting user' });
     }
 }
 
+// Create user
 async function createUser(req, res) {
+    const { username, password } = req.body;
+
     try {
+        const newUser = new User({ username, password });
+        await newUser.save();
 
-        await new users({ ...req.body }).save()
-        res.status(201).json({ message: 'user created' })
+        res.status(201).json({ message: 'User created successfully' });
     } catch (error) {
-        console.log('error fetching all users', error)
-        res.status(500).json({ message: 'error creating user' })
-
+        console.error(error);
+        res.status(500).json({ message: 'Error creating user' });
     }
 }
 
+// Delete user by ID
 async function deleteUser(req, res) {
     try {
-        const { id } = req.params
-        const user = await users.findByIdAndDelete(id)
-        res.json(user)
+        const { id } = req.params;
+        const user = await User.findByIdAndDelete(id);
+        res.json(user);
     } catch (error) {
-        console.log('error deleting user', error)
-        res.status(500).json({ message: 'error  deleting user' })
+        console.log('error deleting user', error);
+        res.status(500).json({ message: 'error deleting user' });
     }
 }
-
-
 
 module.exports = {
     getAllUsers,
     getUserById,
     createUser,
     deleteUser
-}
+};
