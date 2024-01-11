@@ -8,6 +8,12 @@ npm run dev
 
 ---
 
+install bcrypt using this command
+
+npm i bcrypt
+
+---
+
 if you need to install anything use:
 
 npm install cors express dotenv mongoose
