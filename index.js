@@ -1,24 +1,27 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const cors = require('cors')
-require('dotenv').config()
-const userRoutes = require('./routes/user')
+require('dotenv').config();
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const userRoutes = require('./routes/user');
 
-const app = express()
+const app = express();
 
-//middleware
-app.use(cors())
-app.use(express.json())
+// Middleware
+app.use(cors());
+app.use(express.json());
 
-//routes
-app.use('/users', userRoutes)
+// Routes
+app.use('/users', userRoutes);
 
-
-// db connection 
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log('db connected'))
+// Database connection
+mongoose.connect('mongodb+srv://rock-n-review:admin@rock-n-reviews.b4ijl9v.mongodb.net/rock-n-reviews?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('DB connected'))
     .catch(err => console.error(err));
 
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 8080;
 
-app.listen(PORT, console.log(`listening on port ${PORT}`))
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
+
