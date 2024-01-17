@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
     pass: {
         type: String,
         required: true,
-        minlength: 8,
+        minlength: 4,
     },
 });
 
