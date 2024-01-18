@@ -16,8 +16,8 @@ async function getAllUsers(req, res) {
 // Show user by ID
 async function getUserById(req, res) {
     try {
-        const { id } = req.params;
-        const user = await User.findById(id);
+        const { _id } = req.params;
+        const user = await User.findById(_id);
 
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
@@ -78,8 +78,8 @@ async function loginUser(req, res) {
 // Delete user by ID
 async function deleteUser(req, res) {
     try {
-        const { id } = req.params;
-        const deletedUser = await User.findByIdAndDelete(id);
+        const { _id } = req.params;
+        const deletedUser = await User.findByIdAndDelete(_id);
 
         if (!deletedUser) {
             return res.status(404).json({ message: 'User not found' });
