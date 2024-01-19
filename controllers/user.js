@@ -31,7 +31,8 @@ async function getUserById(req, res) {
 }
 
 async function createUser(req, res) {
-    const { userName, pass } = req.body;
+    const { name, userName, pass } = req.body;
+    
 
     try {
         // Hash the password before saving it to the database
@@ -39,7 +40,7 @@ async function createUser(req, res) {
 
         console.log('Received registration request:', { userName, hashedPassword });
 
-        const newUser = new User({ userName, pass: hashedPassword });
+        const newUser = new User({ name, userName, pass: hashedPassword });
         await newUser.save();
 
         res.status(201).json({ message: 'User created successfully' });
@@ -52,11 +53,15 @@ async function createUser(req, res) {
 async function loginUser(req, res) {
     const { username, password } = req.body;
 
+    // Log received username and password for debugging
+    console.log('Received login request with username:', username, 'and password:', password);
+
     try {
         // Find the user by username
         const user = await User.findOne({ userName: username });
 
         if (!user) {
+            console.log('User not found in the database');
             return res.status(401).json({ message: 'Invalid username or password' });
         }
 
