@@ -2,9 +2,10 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const userRoutes = require('./routes/user');
 const { body, validationResult } = require('express-validator');
 const helmet = require('helmet');
+const userRoutes = require('./routes/user');
+const reviewRoutes = require('./routes/reviews');
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use('/users/register', [
 
 // Routes
 app.use('/users', userRoutes);
+app.use('/reviews', reviewRoutes);
 
 // Database connection
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -39,3 +41,4 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
