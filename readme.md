@@ -7,6 +7,13 @@ The Rock-n-review-backend is the backend server for the Rock-n-Review Music Revi
 
 Rock-n-Review is a music review platform where users can search for their favorite albums or songs by an artist, rate them, and share their reviews. Additionally, users can engage in discussions by starting comment sections on existing reviews.
 
+## Contributors
+
+C-jay Solly at https://github.com/Csolly89 --
+Thomas McCullough at https://github.com/tamccullough88 --
+Lin Zorrilla at https://github.com/NeNeZoRr --
+Charles D. at https://github.com/Cwdrian --
+
 ## Getting Started
 
 To set up and run the backend server, follow these steps:
