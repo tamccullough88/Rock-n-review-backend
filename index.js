@@ -31,7 +31,7 @@ app.use('/users/register', [
 
 // Routes
 app.use('/users', userRoutes);
-app.use('/album-reviews', albumReviewRoutes);
+app.use('/reviews', albumReviewRoutes);
 app.use('/song-reviews', songReviewRoutes);
 
 // Database connection
