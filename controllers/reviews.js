@@ -16,14 +16,14 @@ async function getAllReviews(req, res) {
 async function submitReview(req, res) {
 
     try {
-        const { artist, albumTitle, rating, comments } = req.body;
+        const { artist, albumTitle, albumId, rating, comments } = req.body;
 
         // Check if required fields are present
         if (!artist || !albumTitle || !albumId || !rating || !comments) {
             return res.status(400).json({ error: 'Missing required fields' });
         }
 
-        // Validate the rating (assuming it's a number between 1 and 5)
+        // Validate the rating
         if (isNaN(rating) || rating < 1 || rating > 5) {
             return res.status(400).json({ error: 'Invalid rating value' });
         }

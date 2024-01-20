@@ -53,7 +53,7 @@ async function createUser(req, res) {
 async function loginUser(req, res) {
     const { username, password } = req.body;
 
-    // Log received username and password for debugging
+    // Log received username and password
     console.log('Received login request with username:', username, 'and password:', password);
 
     try {
@@ -72,7 +72,6 @@ async function loginUser(req, res) {
             return res.status(401).json({ message: 'Invalid username or password' });
         }
 
-        // You can customize the response based on a successful login
         res.status(200).json({ message: 'Login successful', user: user });
     } catch (error) {
         console.error('Error during login', error);
