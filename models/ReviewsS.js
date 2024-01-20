@@ -30,6 +30,6 @@ const reviewSSchema = new mongoose.Schema({
 
 });
 
-const ReviewS = mongoose.model('ReviewS', reviewSSchema);
+const songReviews = mongoose.model('Song Reviews', reviewSSchema);
 
-module.exports = ReviewS;
+module.exports = songReviews;
