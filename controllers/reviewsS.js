@@ -1,6 +1,5 @@
 const Review = require('../models/ReviewsS');
 
-
 // get all reviews
 async function getAllReviews(req, res) {
     try {
@@ -58,9 +57,50 @@ async function getSongReview(req, res) {
     res.status(200).json(review)
 }
 
+// update review by Id
+async function updateReview(req, res) {
+    try {
+        const { artist, albumTitle, trackName, rating, comments } = req.body;
+        const updatedReview = await Review.findOneAndUpdate(
+            { _id: req.params.id },
+            { artist, albumTitle, trackName, rating, comments },
+            { new: true }
+        );
+
+        if (!updatedReview) {
+            return res.status(404).json({ error: 'Review not found' });
+        }
+
+        res.status(200).json({ message: 'Review updated successfully', updatedReview });
+    } catch (error) {
+        console.error('Error updating review:', error);
+        if (error.name === 'ValidationError') {
+            return res.status(400).json({ error: 'Validation error', details: error.errors });
+        }
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+// delete review by Id
+async function deleteReview(req, res) {
+    try {
+        const deletedReview = await Review.findById({ _id: req.params.id });
+
+        if (!deletedReview) {
+            return res.status(404).json({ error: 'Review not found' });
+        }
+
+        res.status(200).json({ message: 'Review deleted successfully', deletedReview });
+    } catch (error) {
+        console.error('Error deleting review:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
 
 module.exports = {
     getAllReviews,
     submitReview,
-    getSongReview
-}
+    getSongReview,
+    updateReview,
+    deleteReview
+};
