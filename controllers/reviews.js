@@ -54,7 +54,7 @@ async function submitReview(req, res) {
 //get review by album name
 
 async function getAlbumReview(req, res) {
-    const review = await Review.find({ albumId: req.params.albumId })
+    const review = await Review.find({ trackId: req.params.trackId })
     res.status(200).json(review)
 }
 
