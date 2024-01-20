@@ -1,20 +1,32 @@
+// controllers/reviews.js
+
 const Review = require('../models/reviews');
 
-
-// get all reviews
+// Get all reviews
 async function getAllReviews(req, res) {
     try {
         const allReviews = await Review.find();
         res.json(allReviews);
     } catch (error) {
-        console.error('Error fetching all users', error);
-        res.status(500).json({ message: 'Error getting all users' });
+        console.error('Error fetching all reviews', error);
+        res.status(500).json({ message: 'Error getting all reviews' });
     }
 }
 
-// submit album review
-async function submitReview(req, res) {
+// Get review by album ID
+async function getAlbumReview(req, res) {
+    try {
+        const albumId = req.params.albumId;
+        const reviews = await Review.find({ albumId });
+        res.json(reviews);
+    } catch (error) {
+        console.error('Error fetching reviews by album ID', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
 
+// Submit a new review
+async function submitReview(req, res) {
     try {
         const { artist, albumTitle, albumId, rating, comments } = req.body;
 
@@ -51,17 +63,58 @@ async function submitReview(req, res) {
     }
 }
 
-//get review by album name
+async function updateReview(req, res) {
+    try {
+        const albumId = req.params.id; // Change this line
+        const { comments } = req.body;
 
-async function getAlbumReview(req, res) {
-    const review = await Review.find({ albumId: req.params.albumId })
-    res.status(200).json(review)
+        // Check if the review exists
+        const existingReview = await Review.findById(albumId);
+        if (!existingReview) {
+            return res.status(404).json({ error: 'Review not found' });
+        }
+
+        // Update the review
+        existingReview.comments = comments;
+        await existingReview.save();
+
+        res.status(200).json({ message: 'Review updated successfully' });
+    } catch (error) {
+        console.error('Error updating review:', error);
+        if (error.name === 'ValidationError') {
+            // Handle validation errors from MongoDB
+            return res.status(400).json({ error: 'Validation error', details: error.errors });
+        }
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+
+// Delete review by ID
+async function deleteReview(req, res) {
+    try {
+        const reviewId = req.params.id;
+
+        // Check if the review exists
+        const existingReview = await Review.findById(reviewId);
+        if (!existingReview) {
+            return res.status(404).json({ error: 'Review not found' });
+        }
+
+        // Delete the review
+        await Review.findByIdAndDelete(reviewId);
+
+        res.status(200).json({ message: 'Review deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting review:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 }
 
 
 module.exports = {
     getAllReviews,
+    getAlbumReview,
     submitReview,
-    getAlbumReview
+    updateReview,
+    deleteReview
 };
-

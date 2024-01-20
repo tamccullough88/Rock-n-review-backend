@@ -6,6 +6,7 @@ const { body, validationResult } = require('express-validator');
 const helmet = require('helmet');
 const userRoutes = require('./routes/user');
 const reviewRoutes = require('./routes/reviews');
+const songReviewRoutes = require('./routes/reviewsS');
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use('/users/register', [
 // Routes
 app.use('/users', userRoutes);
 app.use('/reviews', reviewRoutes);
+app.use('/song-reviews', songReviewRoutes);
 
 // Database connection
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
