@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const reviewSchema = new mongoose.Schema({
+const reviewSSchema = new mongoose.Schema({
     artist: {
         type: String,
         required: true
@@ -9,7 +9,11 @@ const reviewSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    albumId: {
+    trackName: {
+        type: String,
+        required: true
+    },
+    trackId: {
         type: String,
         required: true
     },
@@ -26,6 +30,6 @@ const reviewSchema = new mongoose.Schema({
 
 });
 
-const Review = mongoose.model('Review', reviewSchema);
+const ReviewS = mongoose.model('ReviewS', reviewSSchema);
 
-module.exports = Review;
+module.exports = ReviewS;

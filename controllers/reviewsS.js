@@ -1,4 +1,4 @@
-const Review = require('../models/reviews');
+const Review = require('../models/ReviewsS');
 
 
 // get all reviews
@@ -16,10 +16,10 @@ async function getAllReviews(req, res) {
 async function submitReview(req, res) {
 
     try {
-        const { artist, albumTitle, albumId, rating, comments } = req.body;
+        const { artist, albumTitle, trackName, trackId, rating, comments } = req.body;
 
         // Check if required fields are present
-        if (!artist || !albumTitle || !albumId || !rating || !comments) {
+        if (!artist || !albumTitle || !trackName || !trackId || !rating || !comments) {
             return res.status(400).json({ error: 'Missing required fields' });
         }
 
@@ -32,7 +32,8 @@ async function submitReview(req, res) {
         const newReview = new Review({
             artist,
             albumTitle,
-            albumId,
+            trackName,
+            trackId,
             rating,
             comments,
         });
@@ -50,11 +51,10 @@ async function submitReview(req, res) {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }
-
 //get review by album name
 
-async function getAlbumReview(req, res) {
-    const review = await Review.find({ albumId: req.params.albumId })
+async function getSongReview(req, res) {
+    const review = await Review.find({ trackId: req.params.trackId })
     res.status(200).json(review)
 }
 
@@ -62,5 +62,5 @@ async function getAlbumReview(req, res) {
 module.exports = {
     getAllReviews,
     submitReview,
-    getAlbumReview
-};
+    getSongReview
+}
