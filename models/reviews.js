@@ -19,6 +19,9 @@ const reviewSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    albumId: {
+        type: String
+    }
 });
 
 const Review = mongoose.model('Review', reviewSchema);
