@@ -76,11 +76,10 @@ If you're interested in contributing to this project, please follow the [contrib
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the [MIT License](LICENSE).
 
 ## Acknowledgments
 
 - Special thanks to the contributors who have contributed to the development of this project.
-- Inspirations: [Mention any sources or projects that inspired your work.]
 
 Feel free to tailor the README according to your project specifics and include any additional information you find relevant.
