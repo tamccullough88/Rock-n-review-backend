@@ -70,9 +70,6 @@ The backend exposes the following API endpoints:
 - `PUT /reviews/:id`: Update details of a specific review.
 - `DELETE /reviews/:id`: Delete a specific review.
 
-## Contributing
-
-If you're interested in contributing to this project, please follow the [contribution guidelines](CONTRIBUTING.md).
 
 ## License
 
