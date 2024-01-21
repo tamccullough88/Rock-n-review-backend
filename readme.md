@@ -33,7 +33,7 @@ To set up and run the backend server, follow these steps:
 3. Install dependencies:
 
    ```bash
-  npm install cors express dotenv mongoose bcrypt helmet
+   npm install cors express dotenv mongoose bcrypt helmet
    ```
 
 4. Start the server:
