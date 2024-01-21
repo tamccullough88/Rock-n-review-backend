@@ -65,24 +65,21 @@ async function submitReview(req, res) {
 
 async function updateReview(req, res) {
     try {
-        const reviewId = req.params.id; // Change this line
-        const { comments } = req.body;
+        const { artist, albumTitle, rating, comments } = req.body;
+        const updatedReview = await Review.findOneAndUpdate(
+            { _id: req.params.id },
+            { artist, albumTitle, rating, comments },
+            { new: true }
+        );
 
-        // Check if the review exists
-        const existingReview = await Review.findById(reviewId);
-        if (!existingReview) {
+        if (!updatedReview) {
             return res.status(404).json({ error: 'Review not found' });
         }
 
-        // Update the review
-        existingReview.comments = comments;
-        await existingReview.save();
-
-        res.status(200).json({ message: 'Review updated successfully' });
+        res.status(200).json({ message: 'Review updated successfully', updatedReview });
     } catch (error) {
         console.error('Error updating review:', error);
         if (error.name === 'ValidationError') {
-            // Handle validation errors from MongoDB
             return res.status(400).json({ error: 'Validation error', details: error.errors });
         }
         res.status(500).json({ error: 'Internal Server Error' });
