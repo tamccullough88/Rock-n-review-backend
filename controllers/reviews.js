@@ -65,11 +65,11 @@ async function submitReview(req, res) {
 
 async function updateReview(req, res) {
     try {
-        const albumId = req.params.id; // Change this line
+        const reviewId = req.params.id; // Change this line
         const { comments } = req.body;
 
         // Check if the review exists
-        const existingReview = await Review.findById(albumId);
+        const existingReview = await Review.findById(reviewId);
         if (!existingReview) {
             return res.status(404).json({ error: 'Review not found' });
         }
