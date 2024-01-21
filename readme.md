@@ -42,7 +42,7 @@ To set up and run the backend server, follow these steps:
    npm run dev
    ```
 
-The backend server should now be running on the specified port.
+The backend server should now be running at http://localhost:8080.
 
 ## Connecting to the Frontend
 
