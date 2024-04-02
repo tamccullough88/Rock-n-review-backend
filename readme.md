@@ -50,7 +50,7 @@ For the backend to function correctly, it needs to be connected to the frontend 
 
 ## API Endpoints
 
-The backend exposes the following API endpoints:
+The backend hosts the following API endpoints:
 
 - `GET /albums`: Retrieve a list of albums.
 - `GET /albums/:id`: Retrieve details of a specific album.
